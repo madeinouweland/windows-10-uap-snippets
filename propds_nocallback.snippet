@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <SnippetTypes>
+                <SnippetType>Expansion</SnippetType>
+            </SnippetTypes>
+            <Title>Define a DependencyProperty for Silverlight application</Title>
+            <Shortcut>propds_nocallback</Shortcut>
+            <Description>
+                Creates a Silverlight Dependency Property without callback
+            </Description>
+            <Author>Fons Sonnemans and Loek van den ouweland</Author>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal Editable="true">
+                    <ID>type</ID>
+                    <ToolTip>Property Type</ToolTip>
+                    <Default>object</Default>
+                </Literal>
+                <Literal Editable="true">
+                    <ID>property</ID>
+                    <ToolTip>Property Name</ToolTip>
+                    <Default>MyProperty</Default>
+                </Literal>
+                <Literal>
+                    <ID>defaultvalue</ID>
+                    <ToolTip>The default value for this property.</ToolTip>
+                    <Default>null</Default>
+                </Literal>
+                <Literal Editable="false">
+                    <ID>ownerclass</ID>
+                    <ToolTip>
+                        The owning class of this Property. Typically the class that it is declared in.
+                    </ToolTip>
+                    <Default>ClassNamePlaceholder</Default>
+                    <Function>ClassName()</Function>
+                </Literal>
+            </Declarations>
+            <Code Language="csharp">
+                <![CDATA[
+public $type$ $property$ { 
+    get { return ($type$)GetValue($property$Property); } 
+    set { SetValue($property$Property, value); } 
+} 
+
+public static readonly DependencyProperty $property$Property = DependencyProperty.Register("$property$", typeof($type$), typeof($ownerclass$), new PropertyMetadata($defaultvalue$));
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>event</Title>
+      <Shortcut>event</Shortcut>
+      <Description>Code snippet for event declaration and method for raising it</Description>
+      <Author>Fons Sonnemans</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>eventname</ID>
+          <ToolTip>Event name, either NounVerbing or Verbing for pre-events, or NounVerbed or Verbed for post-events</ToolTip>
+          <Default>NounVerbed</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp">
+        <![CDATA[
+public event EventHandler $eventname$;
+
+protected virtual void On$eventname$()
+{
+    EventHandler handler = $eventname$;
+    if (handler != null)
+    {
+        handler(this, EventArgs.Empty);
+    }
+}]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
