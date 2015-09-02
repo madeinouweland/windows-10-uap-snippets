@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <SnippetTypes>
+                <SnippetType>Expansion</SnippetType>
+            </SnippetTypes>
+            <Title>Define an attached property for a Windows 10 Universal app</Title>
+            <Shortcut>propas</Shortcut>
+            <Description>
+                Code snippet for an attached property with callback for the DependencyPropertyChanged event
+            </Description>
+            <Author>Loek van den Ouweland</Author>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal Editable="true">
+                    <ID>type</ID>
+                    <ToolTip>Property Type</ToolTip>
+                    <Default>object</Default>
+                </Literal>
+                <Literal Editable="true">
+                    <ID>property</ID>
+                    <ToolTip>Property Name</ToolTip>
+                    <Default>MyProperty</Default>
+                </Literal>
+				<Literal>
+                    <ID>defaultvalue</ID>
+                    <ToolTip>The default value for this property.</ToolTip>
+                    <Default>null</Default>
+                </Literal>
+                <Literal Editable="false">
+                    <ID>ownerclass</ID>
+                    <ToolTip>
+                        The owning class of this Property. Typically the class that it is declared in.
+                    </ToolTip>
+                    <Default>ClassNamePlaceholder</Default>
+                    <Function>ClassName()</Function>
+                </Literal>
+                <Literal Editable="true">
+                    <ID>target</ID>
+                    <ToolTip>Attachable to</ToolTip>
+                    <Default>FrameworkElement</Default>
+                </Literal>
+            </Declarations>
+            <Code Language="csharp">
+                <![CDATA[
+public static $type$ Get$property$(DependencyObject obj)
+{
+	return ($type$)obj.GetValue($property$Property);
+}
+
+public static void Set$property$(DependencyObject obj, $type$ value)
+{
+	obj.SetValue($property$Property, value);
+}
+
+public static readonly DependencyProperty $property$Property = DependencyProperty.RegisterAttached("$property$", typeof($type$), typeof($ownerclass$), new PropertyMetadata($defaultvalue$, On$property$Changed));
+
+private static void On$property$Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+{
+	var source = d as $target$; 
+	if (source != null) { 
+ 		var value = ($type$)e.NewValue;
+		//TODO: Handle new value. 
+  	}
+}
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
