@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>clsDelegateCommand</Title>
+      <Shortcut>clsDelCom</Shortcut>
+      <Description>Delegate Command class</Description>
+      <Author>Loek van den Ouweland</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="csharp"><![CDATA[public class DelegateCommand : DelegateCommand<object> {
+    public DelegateCommand(Action executeAction)
+        : base(_ => executeAction()) {
+    }
+
+    public DelegateCommand(Action executeAction, Func<bool> canExecute)
+        : base(_ => executeAction(), _ => canExecute()) {
+    }
+}
+
+public class DelegateCommand<T> : ICommand {
+    public event EventHandler CanExecuteChanged;
+
+    private readonly Predicate<T> _canExecute;
+    private readonly Action<T> _executeAction;
+
+    public DelegateCommand(Action<T> executeAction) {
+        _executeAction = executeAction;
+    }
+
+    public DelegateCommand(Action<T> executeAction, Predicate<T> canExecute)
+        : this(executeAction) {
+        _canExecute = canExecute;
+    }
+
+    public bool CanExecute(T parameter) {
+        if (_canExecute != null) {
+            return _canExecute(parameter);
+        }
+        return true;
+    }
+
+    public void Execute(T parameter) {
+        if (_executeAction != null) {
+            _executeAction(parameter);
+        }
+
+        if (CanExecuteChanged != null) {
+            CanExecuteChanged(this, EventArgs.Empty);
+        }
+    }
+
+    public void RaiseCanExecuteChanged() {
+        OnCanExecuteChanged();
+    }
+
+    protected virtual void OnCanExecuteChanged() {
+        EventHandler handler = CanExecuteChanged;
+        if (handler != null) {
+            handler(this, EventArgs.Empty);
+        }
+    }
+
+    bool ICommand.CanExecute(object parameter) {
+        return CanExecute((T)parameter);
+    }
+
+    void ICommand.Execute(object parameter) {
+        Execute((T)parameter);
+    }
+}
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
