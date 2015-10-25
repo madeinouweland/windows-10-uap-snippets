@@ -36,7 +36,7 @@ public $type$ $property$
 	set { 
 		if ($field$ != value) {
 			$field$ = value;
-			NotifyOfPropertyChange(() => $property$);
+			NotifyOfPropertyChange(nameof($property$));
 		}
 	}
 }]]>
