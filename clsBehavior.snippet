@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>clsBehavior</Title>
+      <Shortcut>clsBehavior</Shortcut>
+      <Description>Code snippet to create a Universal App Behavior</Description>
+      <Author>Loek van den Ouweland</Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>behaviorname</ID>
+          <ToolTip>Behavior name</ToolTip>
+          <Default>SelectAfterRemoveBehavior</Default>
+        </Literal>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Type to apply behavior on</ToolTip>
+          <Default>ListViewBase</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp"><![CDATA[
+// Behaviors need a reference to Universal Windows > Extensions > behaviors SDK (12.0)
+
+[TypeConstraint(typeof(ListViewBase))]
+public class $behaviorname$ : DependencyObject, IBehavior
+{
+	private $type$ _associatedObject;
+
+	public DependencyObject AssociatedObject
+	{
+		get { return _associatedObject; }
+	}
+
+	public void Attach(DependencyObject associatedObject)
+	{
+		_associatedObject = ($type$)associatedObject;
+	}
+
+	public void Detach()
+	{
+		// dispose stuff
+	}
+}]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
