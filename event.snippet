@@ -24,7 +24,7 @@ public event EventHandler $eventname$;
 
 protected virtual void On$eventname$()
 {
-    EventHandler handler = $eventname$;
+    var handler = $eventname$;
     if (handler != null)
     {
         handler(this, EventArgs.Empty);
