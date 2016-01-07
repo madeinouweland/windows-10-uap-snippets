@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <SnippetTypes>
+                <SnippetType>Expansion</SnippetType>
+            </SnippetTypes>
+            <Title>Create Equals() and GetHashCode()</Title>
+            <Shortcut>equalshash</Shortcut>
+            <Author>Loek van den Ouweland</Author>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal Editable="true">
+                    <ID>type</ID>
+                    <ToolTip>Object Type</ToolTip>
+                    <Default>object</Default>
+                </Literal>
+            </Declarations>
+            <Code Language="csharp">
+                <![CDATA[
+public override bool Equals(object obj)
+{
+    if (ReferenceEquals(null, obj)) return false;
+    if (ReferenceEquals(this, obj)) return true;
+    if (obj.GetType() != this.GetType()) return false;
+    return GetHashCode() == (($type$)obj).GetHashCode();
+}
+
+public override int GetHashCode()
+{
+	// single value:
+	// return _x.GetHashCode();
+	
+	// multiple values:
+	// int hash = 0;
+	// hash ^= _x.GetHashCode();
+	// hash ^= _y.GetHashCode();
+	// hash ^= (_z.!= null ? _z.zzz.GetHashCode() : 0);
+    // return hash;
+}
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
