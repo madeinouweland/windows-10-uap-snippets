@@ -10,7 +10,7 @@
             <Description>
                 Code snippet for a property using DependencyProperty as the backing store and a Handler for the DependencyPropertyChanged event
             </Description>
-            <Author>Fons Sonnemans</Author>
+            <Author>Fons Sonnemans and Loek van den Ouweland</Author>
         </Header>
         <Snippet>
             <Declarations>
@@ -47,12 +47,17 @@ public $type$ $property$ {
 
 public static readonly DependencyProperty $property$Property = DependencyProperty.Register("$property$", typeof($type$), typeof($ownerclass$), new PropertyMetadata($defaultvalue$, On$property$PropertyChanged)); 
 
-private static void On$property$PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) { 
-  var source = d as $ownerclass$; 
-  if (source != null) { 
-     var value = ($type$)e.NewValue;
-     //TODO: Handle new value. 
+private static void On$property$PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
+  var source = ($ownerclass$)d;
+
+  var oldValue = e.OldValue as $type$;
+  if (oldValue != null)
+  {
+      // dispose previous subcriptions like events
   }
+
+  var newValue = ($type$)e.NewValue;
+  // handle newValue
 } 
 ]]>
             </Code>
