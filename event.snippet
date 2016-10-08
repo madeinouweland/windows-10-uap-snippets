@@ -5,7 +5,7 @@
       <Title>event</Title>
       <Shortcut>event</Shortcut>
       <Description>Code snippet for event declaration and method for raising it</Description>
-      <Author>Fons Sonnemans</Author>
+      <Author>Fons Sonnemans and Loek van den Ouweland</Author>
       <SnippetTypes>
         <SnippetType>Expansion</SnippetType>
       </SnippetTypes>
@@ -14,22 +14,13 @@
       <Declarations>
         <Literal>
           <ID>eventname</ID>
-          <ToolTip>Event name, either NounVerbing or Verbing for pre-events, or NounVerbed or Verbed for post-events</ToolTip>
           <Default>NounVerbed</Default>
         </Literal>
       </Declarations>
       <Code Language="csharp">
         <![CDATA[
-public event EventHandler $eventname$;
-
-protected virtual void On$eventname$()
-{
-    var handler = $eventname$;
-    if (handler != null)
-    {
-        handler(this, EventArgs.Empty);
-    }
-}]]>
+public event EventHandler $eventname$; // $eventname$?.Invoke(this, EventArgs.Empty);
+]]>
       </Code>
     </Snippet>
   </CodeSnippet>
